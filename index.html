@@ -157,6 +157,10 @@ table.datos tr:hover td{background:#FBF8F3}
 @media(max-width:640px){.kpi-grid{grid-template-columns:repeat(2,1fr)}header{padding:0 14px}main{padding:16px 14px 50px}.fecha-hoy{display:none}}
 .leaflet-container{font-family:'Inter'}
 .popup-sec b{font-family:'Barlow Semi Condensed';font-size:16px}
+.filtros-mapa{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px 14px;border-bottom:1px solid #E8E2D8;background:#FBF9F5}
+.filtros-mapa select{font:inherit;font-size:12.5px;padding:5px 8px;border:1px solid #D9D2C6;background:#fff;color:#26221E;max-width:180px}
+.filtros-mapa .chk{font-size:12.5px;display:flex;gap:6px;align-items:center;color:#26221E;font-weight:600}
+.filtros-mapa .mini{margin-left:auto;color:#9B9186;font-size:12px}
 </style>
 </head>
 <body>
@@ -213,6 +217,13 @@ table.datos tr:hover td{background:#FBF8F3}
           <button data-c="periodo" onclick="cambiarCapa('periodo',this)">Calendario</button>
           <button data-c="cobertura" onclick="cambiarCapa('cobertura',this)">Cobertura</button>
         </div>
+      </div>
+      <div class="filtros-mapa">
+        <label class="chk"><input type="checkbox" id="mVer" checked onchange="onFiltroMapa()"> Actividades</label>
+        <select id="mTipo" onchange="onFiltroMapa()"><option value="">Todos los tipos</option></select>
+        <select id="mCoord" onchange="onFiltroMapa()"><option value="">Todos los responsables</option></select>
+        <select id="mMes" onchange="onFiltroMapa()"><option value="">Todos los meses</option></select>
+        <span class="mini" id="mNum"></span>
       </div>
       <div id="mapa"></div>
       <div class="leyenda" id="leyenda"></div>
@@ -483,6 +494,9 @@ function mapActs(rows){
       tipo: tipoDe(evento, valDe(o,/^tipo/)),
       secciones,
       asistentes: numDe(valDe(o,/asistent/,/aforo/,/personas/)),
+      lat, lng,
+      evento: String(evento||'Actividad').trim(),
+      hora,
       notas: [evento, hora, obs].filter(Boolean).join(' · ')
     };
   }).filter(Boolean);
@@ -622,7 +636,7 @@ async function cargarDatos(){
 let DATA = Object.assign(datosDemo(), {parrilla: []});
 let capaActual = 'clasificacion';
 let DISTRITO = ''; // '' = todos
-let mapa, capaGeo;
+let mapa, capaGeo, capaPuntos;
 const porSec = {}; GEO.features.forEach(f=>porSec[f.properties.SECCION]=f.properties);
 const charts = {};
 
@@ -661,9 +675,21 @@ function estiloSec(f){
   if(!enDistrito(p)) return {color:'#fff', weight:.3, fillColor:'#CFC8BD', fillOpacity:.15};
   return {color:'#fff', weight:.6, fillColor:colorSec(p), fillOpacity:.82};
 }
+const FILTRO_MAPA = {tipo:'', coord:'', mes:'', mostrar:true};
+function actsFiltradasMapa(){
+  return DATA.acts.filter(actEnDistrito).filter(a=>{
+    if(FILTRO_MAPA.tipo && a.tipo!==FILTRO_MAPA.tipo) return false;
+    if(FILTRO_MAPA.coord && a.coordinador!==FILTRO_MAPA.coord) return false;
+    if(FILTRO_MAPA.mes){
+      const k = a.fecha.getFullYear()+'-'+String(a.fecha.getMonth()).padStart(2,'0');
+      if(k!==FILTRO_MAPA.mes) return false;
+    }
+    return true;
+  });
+}
 function seccionesVisitadas(){
   const s = new Set();
-  DATA.acts.forEach(a=>a.secciones.forEach(x=>s.add(x)));
+  actsFiltradasMapa().forEach(a=>a.secciones.forEach(x=>s.add(x)));
   return s;
 }
 function initMapa(){
@@ -675,8 +701,46 @@ function initMapa(){
     l.on('mouseout',()=>capaGeo.resetStyle(l));
     l.bindTooltip('Sección '+f.properties.SECCION,{sticky:true});
   }}).addTo(mapa);
+  capaPuntos = L.layerGroup().addTo(mapa);
   mapa.fitBounds(capaGeo.getBounds());
   pintarLeyenda();
+}
+function pintarPuntos(){
+  if(!capaPuntos) return;
+  capaPuntos.clearLayers();
+  const el = document.getElementById('mNum');
+  if(!FILTRO_MAPA.mostrar){ if(el) el.textContent='puntos ocultos'; return; }
+  const acts = actsFiltradasMapa().filter(a=>a.lat!=null && a.lng!=null && !isNaN(a.lat) && !isNaN(a.lng));
+  acts.forEach(a=>{
+    L.circleMarker([a.lat,a.lng],{radius:7,color:'#26221E',weight:1.5,fillColor:'#F55B00',fillOpacity:.95})
+     .bindPopup(`<b>${escH(a.evento)}</b><br>
+        ${a.fecha.toLocaleDateString('es-MX',{day:'numeric',month:'long'})}${a.hora?' · '+escH(a.hora):''}<br>
+        ${escH(a.coordinador)} · <span class="mini">${escH(a.tipo)}</span><br>
+        Sección: <b>${a.secciones.join(', ')||'fuera del polígono'}</b>${F(a.asistentes)!=='0'?'<br>Asistentes: '+F(a.asistentes):''}`)
+     .addTo(capaPuntos);
+  });
+  if(el) el.textContent = acts.length+' actividades en mapa';
+}
+function llenarFiltrosMapa(){
+  const put=(id,vals)=>{const s=document.getElementById(id); if(!s)return; const cur=s.value;
+    s.innerHTML = s.options[0].outerHTML + vals.map(v=>`<option value="${escH(v)}">${escH(v)}</option>`).join('');
+    if([...s.options].some(o=>o.value===cur)) s.value=cur;};
+  put('mTipo',[...new Set(DATA.acts.map(a=>a.tipo))].sort());
+  put('mCoord',[...new Set(DATA.acts.map(a=>a.coordinador))].sort());
+  const meses=[...new Set(DATA.acts.map(a=>a.fecha.getFullYear()+'-'+String(a.fecha.getMonth()).padStart(2,'0')))].sort();
+  const NM=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+  const s=document.getElementById('mMes');
+  if(s){const cur=s.value;
+    s.innerHTML='<option value="">Todos los meses</option>'+meses.map(k=>{const[y,m]=k.split('-');return `<option value="${k}">${NM[+m]} ${y}</option>`;}).join('');
+    if([...s.options].some(o=>o.value===cur)) s.value=cur;}
+}
+function onFiltroMapa(){
+  FILTRO_MAPA.tipo = document.getElementById('mTipo').value;
+  FILTRO_MAPA.coord = document.getElementById('mCoord').value;
+  FILTRO_MAPA.mes = document.getElementById('mMes').value;
+  FILTRO_MAPA.mostrar = document.getElementById('mVer').checked;
+  pintarPuntos();
+  if(capaActual==='cobertura') capaGeo.setStyle(estiloSec);
 }
 function cambiarCapa(c,btn){
   capaActual = c;
@@ -832,6 +896,8 @@ function render(){
     <td>${c.publico}</td><td class="num">${F(c.alcance)}</td><td class="num">${F(c.likes)}</td><td class="num">${F(c.comentarios)}</td><td class="num">${F(c.compartidos)}</td></tr>`).join('');
 
   pintarParrilla();
+  llenarFiltrosMapa();
+  pintarPuntos();
   if(capaGeo) capaGeo.setStyle(estiloSec);
 }
 
