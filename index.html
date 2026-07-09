@@ -174,7 +174,8 @@ table.datos tr:hover td{background:#FBF8F3}
     </div>
   </div>
   <div class="spacer"></div>
-  <div class="estado-datos"><span class="dot" id="dotDatos"></span><span id="txtDatos">Datos demo</span></div>
+  <div class="estado-datos"><span class="dot" id="dotDatos"></span><span id="txtDatos">Datos demo</span>
+    <a id="lnkDiag" href="#" target="_blank" style="margin-left:8px;color:#F9A825;font-size:11px;display:none">ver datos crudos</a></div>
   <div class="fecha-hoy" id="fechaHoy"></div>
   <button class="btn-config" onclick="abrirConfig()">⚙ Conectar Google Sheets</button>
 </header>
@@ -997,7 +998,11 @@ render();
     txt.textContent = 'Conectando con Google Sheets…';
     DATA = await cargarDatos();
     document.getElementById('dotDatos').classList.add('ok');
-    txt.textContent = 'Datos en vivo · '+DATA.acts.length+' actividades · '+DATA.coms.length+' publicaciones';
+    const ult = DATA.acts.length ? new Date(Math.max(...DATA.acts.map(a=>a.fecha.getTime()))) : null;
+    txt.textContent = 'Datos en vivo · '+DATA.acts.length+' actividades · '+DATA.coms.length+' publicaciones'
+      + (ult ? ' · última: '+ult.toLocaleDateString('es-MX',{day:'numeric',month:'short'}) : '');
+    const ln = document.getElementById('lnkDiag');
+    if(ln && APPS_SCRIPT_URL){ ln.href = APPS_SCRIPT_URL; ln.style.display='inline'; }
     const av = document.getElementById('avisoDemo'); if(av) av.style.display='none';
     render();
   }catch(e){
