@@ -28,7 +28,6 @@ html,body{height:100%}
 body{font-family:'Inter',system-ui,sans-serif;background:var(--fondo);color:var(--tinta);font-size:14px}
 h1,h2,h3,.disp{font-family:'Barlow Semi Condensed',sans-serif}
 .num{font-variant-numeric:tabular-nums}
-
 /* ---------- header ---------- */
 header{background:var(--carbon);color:#fff;padding:0 28px;display:flex;align-items:center;gap:18px;height:64px;position:sticky;top:0;z-index:1100;border-bottom:3px solid var(--naranja)}
 .logo-mh{display:flex;align-items:center;gap:12px}
@@ -43,7 +42,6 @@ header .spacer{flex:1}
 .btn-config{background:transparent;border:1px solid #4A4038;color:#E7E0D8;padding:7px 14px;font-family:'Inter';font-size:12px;font-weight:600;cursor:pointer;transition:.15s}
 .btn-config:hover{border-color:var(--naranja);color:var(--naranja)}
 .fecha-hoy{font-size:12px;color:#8E8479;border-left:1px solid #3A332C;padding-left:16px}
-
 /* ---------- tabs ---------- */
 nav{background:var(--carbon-2);padding:0 28px;display:flex;gap:4px;position:sticky;top:64px;z-index:1090}
 nav button{background:none;border:none;color:#9B9186;font-family:'Barlow Semi Condensed';font-size:15px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;padding:13px 18px;cursor:pointer;border-bottom:3px solid transparent;transition:.15s}
@@ -52,11 +50,9 @@ nav button:hover{color:#fff}
 .filtro-dist{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#9B9186;padding:8px 0}
 .filtro-dist select{background:#312A23;border:1px solid #4A4038;color:#fff;padding:6px 10px;font-family:'Inter';font-size:12.5px;font-weight:600;min-width:110px;cursor:pointer}
 .filtro-dist select:focus{outline:2px solid var(--naranja)}
-
 main{max-width:1420px;margin:0 auto;padding:24px 28px 60px}
 .vista{display:none}
 .vista.act{display:block}
-
 /* ---------- KPIs ---------- */
 .kpi-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:22px}
 .kpi{background:var(--panel);border:1px solid var(--linea);border-top:3px solid var(--naranja);padding:16px 18px 14px}
@@ -68,7 +64,6 @@ main{max-width:1420px;margin:0 auto;padding:24px 28px 60px}
 .kpi.oscuro .val{color:#fff}
 .kpi.oscuro .lbl{color:#A89E93}
 .kpi.oscuro .det{color:#A89E93}
-
 /* ---------- paneles ---------- */
 .fila{display:grid;gap:16px;margin-bottom:16px}
 .fila.mapa{grid-template-columns:1fr 340px}
@@ -78,13 +73,11 @@ main{max-width:1420px;margin:0 auto;padding:24px 28px 60px}
 .panel-h h2{font-size:16px;font-weight:700;letter-spacing:.4px;text-transform:uppercase}
 .panel-h .mini{font-size:11px;color:var(--tinta-2)}
 .panel-b{padding:16px 18px}
-
 /* mapa */
 #mapa{height:560px;background:#EDE8E0}
 .capas{display:flex;gap:6px}
 .capas button{background:#F0EBE3;border:1px solid var(--linea);padding:6px 12px;font-size:11.5px;font-weight:600;color:var(--tinta-2);cursor:pointer;font-family:'Inter'}
 .capas button.act{background:var(--naranja);border-color:var(--naranja);color:#fff}
-
 /* panel de sección */
 .det-vacio{color:var(--tinta-2);font-size:13px;padding:30px 10px;text-align:center}
 .det-sec .encab{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
@@ -99,12 +92,10 @@ main{max-width:1420px;margin:0 auto;padding:24px 28px 60px}
 .act-en-sec{margin-top:14px}
 .act-en-sec .t{font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--tinta-2);margin-bottom:6px}
 .act-item{font-size:12px;padding:6px 0;border-bottom:1px solid #F0EBE3;display:flex;justify-content:space-between}
-
 /* leyenda */
 .leyenda{display:flex;flex-wrap:wrap;gap:12px;padding:10px 18px;border-top:1px solid var(--linea);font-size:11.5px;color:var(--tinta-2)}
 .leyenda span{display:flex;align-items:center;gap:6px}
 .sw{width:12px;height:12px;display:inline-block}
-
 /* tablas */
 table.datos{width:100%;border-collapse:collapse;font-size:12.5px}
 table.datos th{text-align:left;font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--tinta-2);padding:8px 10px;border-bottom:2px solid var(--linea);font-weight:700}
@@ -116,11 +107,9 @@ table.datos tr:hover td{background:#FBF8F3}
 .tag.volanteo{background:#FEF3C7;color:#92400E}
 .tag.brigadeo{background:#FFE0B2;color:#E65100}
 .tag.evento{background:#EDE7DE;color:#57534E}
-
 .graf-wrap{position:relative;height:250px}
 .barra-cob{height:10px;background:#EDE7DE;position:relative;margin-top:8px}
 .barra-cob>div{position:absolute;inset:0;right:auto;background:var(--naranja)}
-
 /* comunicación destacado */
 .top-video{display:flex;gap:16px;align-items:flex-start;background:var(--carbon);color:#fff;padding:18px}
 .top-video .play{min-width:52px;height:52px;background:var(--naranja);display:flex;align-items:center;justify-content:center;font-size:20px}
@@ -129,7 +118,6 @@ table.datos tr:hover td{background:#FBF8F3}
 .top-video .cifras{display:flex;gap:22px;margin-top:10px}
 .top-video .cifras b{font-family:'Barlow Semi Condensed';font-size:22px;font-weight:800;display:block;color:var(--naranja)}
 .top-video .cifras span{font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:#B8AFA5}
-
 /* modal config */
 .modal-bg{position:fixed;inset:0;background:rgba(20,16,12,.6);display:none;align-items:center;justify-content:center;z-index:2000}
 .modal-bg.abierto{display:flex}
@@ -145,10 +133,8 @@ table.datos tr:hover td{background:#FBF8F3}
 .aviso-demo{background:#FFF4E5;border:1px solid #F9C784;color:#8a5a00;font-size:12.5px;padding:10px 14px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center}
 .aviso-demo b{font-weight:700}
 .aviso-demo button{background:none;border:none;color:#B45309;font-weight:700;cursor:pointer;font-size:12.5px;text-decoration:underline}
-
 .filtros{display:flex;gap:8px;align-items:center}
 .filtros select{padding:6px 10px;border:1px solid var(--linea);font-family:'Inter';font-size:12px;background:#fff;color:var(--tinta)}
-
 @media(max-width:1100px){
   .kpi-grid{grid-template-columns:repeat(3,1fr)}
   .fila.mapa,.fila.dos{grid-template-columns:1fr}
@@ -164,7 +150,6 @@ table.datos tr:hover td{background:#FBF8F3}
 </style>
 </head>
 <body>
-
 <header>
   <div class="logo-mh">
     <div class="logo-mark">MH</div>
@@ -179,24 +164,20 @@ table.datos tr:hover td{background:#FBF8F3}
   <div class="fecha-hoy" id="fechaHoy"></div>
   <button class="btn-config" onclick="abrirConfig()">⚙ Conectar Google Sheets</button>
 </header>
-
 <nav>
   <button class="act" data-v="resumen" onclick="cambiarVista('resumen',this)">Resumen ejecutivo</button>
   <button data-v="territorio" onclick="cambiarVista('territorio',this)">Territorio</button>
   <button data-v="comunicacion" onclick="cambiarVista('comunicacion',this)">Comunicación</button>
-  <button data-v="parrilla" onclick="cambiarVista('parrilla',this)">Parrilla</button>
   <div style="flex:1"></div>
   <label class="filtro-dist">Distrito local
     <select id="selDistrito" onchange="cambiarDistrito(this.value)"><option value="">Todos</option></select>
   </label>
 </nav>
-
 <main>
 <div class="aviso-demo" id="avisoDemo">
   <span><b>Modo demostración.</b> Estás viendo datos de ejemplo. Conecta el Google Sheets del equipo para ver actividad real.</span>
   <button onclick="abrirConfig()">Conectar ahora →</button>
 </div>
-
 <!-- ============ RESUMEN ============ -->
 <section class="vista act" id="v-resumen">
   <div class="kpi-grid">
@@ -207,7 +188,6 @@ table.datos tr:hover td{background:#FBF8F3}
     <div class="kpi"><div class="lbl">Contactos en territorio</div><div class="val num" id="kAsist">—</div><div class="det">asistentes acumulados</div></div>
     <div class="kpi"><div class="lbl">Alcance digital</div><div class="val num" id="kAlcance">—</div><div class="det" id="kInter">— interacciones</div></div>
   </div>
-
   <div class="fila mapa">
     <div class="panel">
       <div class="panel-h">
@@ -234,7 +214,6 @@ table.datos tr:hover td{background:#FBF8F3}
       <div class="panel-b" id="detSec"><div class="det-vacio">Selecciona una sección en el mapa para ver su diagnóstico, la acción propuesta y las actividades registradas.</div></div>
     </div>
   </div>
-
   <div class="fila dos">
     <div class="panel">
       <div class="panel-h"><h2>Avance por clasificación</h2><span class="mini">secciones visitadas vs total</span></div>
@@ -246,7 +225,6 @@ table.datos tr:hover td{background:#FBF8F3}
     </div>
   </div>
 </section>
-
 <!-- ============ TERRITORIO ============ -->
 <section class="vista" id="v-territorio">
   <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr)">
@@ -278,7 +256,6 @@ table.datos tr:hover td{background:#FBF8F3}
     </div>
   </div>
 </section>
-
 <!-- ============ COMUNICACIÓN ============ -->
 <section class="vista" id="v-comunicacion">
   <div class="kpi-grid" style="grid-template-columns:repeat(5,1fr)">
@@ -295,30 +272,18 @@ table.datos tr:hover td{background:#FBF8F3}
       <div class="panel-b"><div class="graf-wrap"><canvas id="gPlat"></canvas></div></div>
     </div>
     <div class="panel">
-      <div class="panel-h"><h2>Alcance por tema / campaña</h2><span class="mini">según lo capturado en Publicaciones</span></div>
+      <div class="panel-h"><h2>Alcance por categoría</h2><span class="mini">según lo capturado en Publicaciones</span></div>
       <div class="panel-b"><div class="graf-wrap"><canvas id="gPublico"></canvas></div></div>
     </div>
   </div>
   <div class="panel">
     <div class="panel-h"><h2>Publicaciones</h2><span class="mini">ordenadas por alcance</span></div>
     <div class="panel-b" style="overflow-x:auto">
-      <table class="datos"><thead><tr><th>Fecha</th><th>Plataforma</th><th>Contenido</th><th>Tema / Campaña</th><th>Alcance</th><th>Likes</th><th>Coment.</th><th>Comp.</th></tr></thead><tbody id="tbPubs"></tbody></table>
+      <table class="datos"><thead><tr><th>Fecha</th><th>Formato</th><th>Plataforma</th><th>Categoría</th><th>Estatus</th><th>Contenido</th><th>Elaboró</th><th>Alcance</th><th>Likes</th><th>Coment.</th><th>Comp.</th></tr></thead><tbody id="tbPubs"></tbody></table>
     </div>
   </div>
 </section>
-
-<section class="vista" id="v-parrilla">
-  <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr)">
-    <div class="kpi"><div class="lbl">Filas en parrilla</div><div class="val num" id="pTot">—</div><div class="det" id="pTabs">—</div></div>
-    <div class="kpi"><div class="lbl">Con fecha próxima</div><div class="val num" id="pProx">—</div><div class="det">de hoy en adelante</div></div>
-    <div class="kpi oscuro"><div class="lbl">Buscar en la parrilla</div>
-      <input id="fParrilla" oninput="pintarParrilla()" placeholder="Tema, responsable, estatus…"
-        style="width:100%;margin-top:6px;padding:8px 10px;border:1px solid #4A4038;background:#241F1A;color:#fff;font:inherit"></div>
-  </div>
-  <div id="parrillaCont"></div>
-</section>
 </main>
-
 <!-- modal -->
 <div class="modal-bg" id="modalCfg">
   <div class="modal">
@@ -336,7 +301,6 @@ table.datos tr:hover td{background:#FBF8F3}
     </div>
   </div>
 </div>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script>
@@ -347,7 +311,6 @@ const GEO = {"type":"FeatureCollection","features":[{"type":"Feature","propertie
    Puedes dejar fijo el ID del Sheets aquí para que
    cargue automático al abrir el tablero: */
 let SHEET_ID = ""; // ej. "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms"
-
 const COLORES = {
   'Fortaleza':'#C2410C','Oportunidad':'#F55B00','Recuperable':'#E4C580',
   'Adversa':'#64748B','Sin datos':'#D6D0C6'
@@ -365,7 +328,6 @@ const ACCIONES = {
 };
 const F = n => (n==null||isNaN(n)) ? '—' : Math.round(n).toLocaleString('es-MX');
 const Fk = n => n>=1e6 ? (n/1e6).toFixed(1)+' M' : n>=1e4 ? Math.round(n/1e3)+' k' : F(n);
-
 /* ================= DATOS DEMO ================= */
 function datosDemo(){
   const coords = ['Laura Cantú','Miguel Treviño','Sofía Garza','R. Villarreal','Ana Elizondo','J. Montemayor'];
@@ -385,42 +347,40 @@ function datosDemo(){
       secciones:[...new Set(secs)], asistentes: tipo==='Evento'?80+Math.floor(rnd()*220): tipo==='Lotería'?40+Math.floor(rnd()*90):15+Math.floor(rnd()*60),
       notas:notas[Math.floor(rnd()*notas.length)]});
   }
-  const plats = ['Facebook','Instagram','TikTok','X','YouTube'];
-  const pubs = ['Mujeres 30-55','Jóvenes 18-29','Familias zona sur','Adultos mayores','General ZMM','Emprendedores'];
+  const elaboradores = ['Laura Cantú','Diego Salas','Marifer Longoria','Equipo Digital'];
   const titulos = [
-    ['Video: Martha recorre La Alianza y escucha a vecinas','TikTok','Mujeres 30-55'],
-    ['Reel: 3 compromisos por el agua en Monterrey','Instagram','General ZMM'],
-    ['En vivo: Lotería comunitaria en Col. Independencia','Facebook','Familias zona sur'],
-    ['Video: ¿Por qué el sur de MTY lleva 20 años igual?','TikTok','Jóvenes 18-29'],
-    ['Cápsula: Seguridad con proximidad, no con miedo','YouTube','General ZMM'],
-    ['Hilo: datos del transporte en la ZMM','X','Jóvenes 18-29'],
-    ['Reel: Detrás de cámaras del recorrido en Topo Chico','Instagram','Mujeres 30-55'],
-    ['Video: Martha responde a adultos mayores','Facebook','Adultos mayores'],
-    ['Clip: encuentro con comerciantes del Centro','TikTok','Emprendedores'],
-    ['Reel: brigada de salud en San Bernabé','Instagram','Familias zona sur'],
-    ['Video corto: 60 segundos, 3 propuestas','TikTok','General ZMM'],
-    ['Transmisión: asamblea vecinal Distrito 6','Facebook','Adultos mayores']
+    ['Video: Martha recorre La Alianza y escucha a vecinas','Reel',['IG','FB'],'MH CERCANA'],
+    ['Reel: 3 compromisos por el agua en Monterrey','Reel',['IG'],'MH CEO'],
+    ['En vivo: Lotería comunitaria en Col. Independencia','Post',['FB'],'MH CERCANA'],
+    ['Video: ¿Por qué el sur de MTY lleva 20 años igual?','Reel',['TikTok','IG'],'MERA MERA'],
+    ['Cápsula: Seguridad con proximidad, no con miedo','Post',['YT'],'MH CEO'],
+    ['Story: recorrido por el Centro','Story',['IG','FB'],'COLOR'],
+    ['Reel: Detrás de cámaras del recorrido en Topo Chico','Reel',['IG'],'MH CERCANA'],
+    ['Video: Martha responde a adultos mayores','Post',['FB'],'MERA MERA'],
+    ['Clip: encuentro con comerciantes del Centro','Reel',['TikTok'],'MH JOVENES'],
+    ['Reel: brigada de salud en San Bernabé','Reel',['IG','FB'],'MH CERCANA'],
+    ['Video corto: 60 segundos, 3 propuestas','Post',['TikTok','IG'],'MH Naranja'],
+    ['Transmisión: asamblea vecinal Distrito 6','Post',['FB'],'MH CEO']
   ];
   const coms = titulos.map((t,i)=>{
     const d = new Date(hoy); d.setDate(d.getDate()-Math.floor(rnd()*30));
     const alcance = 8000+Math.floor(rnd()*180000);
-    return {fecha:d, plataforma:t[1], titulo:t[0], publico:t[2], alcance,
+    return {id:'DEMO_'+(i+1), fecha:d, hora:'', categoria:t[3], elaboro:elaboradores[i%elaboradores.length],
+      temas:t[0], estatus: rnd()<0.85?'Publicado':'Programado', formato:t[1],
+      plataformas:t[2], plataforma:t[2].join(', '), titulo:t[0], notas:'', alcance,
       likes:Math.floor(alcance*(0.03+rnd()*0.06)), comentarios:Math.floor(alcance*(0.004+rnd()*0.01)),
       compartidos:Math.floor(alcance*(0.008+rnd()*0.02)), link:''};
   });
   return {acts, coms};
 }
-
 /* ================= CONEXIÓN DE DATOS =================
    1º Apps Script (no requiere que el documento sea público):
       los IDs y pestañas se configuran DENTRO del Apps Script.
    2º Respaldo gviz (botón "Configurar"): requiere documento
       compartido como "Cualquier persona con el enlace". */
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxi_r3_95Gugz9YRVdOz3jeM2sldlcDl3Lky3d5K2O4iQM6lhmnKF-XdMbbB_IxsyI9Cg/exec';
-
 const normK = s => (s==null?'':String(s)).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
 const numDe = v => { const n = Number(String(v==null?'':v).replace(/[^\d.\-]/g,'')); return isNaN(n)?0:n; };
-
 function parseFecha(v){
   if(v==null) return null;
   if(v instanceof Date) return v;
@@ -433,7 +393,6 @@ function parseFecha(v){
   if(m){ const d=new Date(+m[1],+m[2]-1,+m[3]); if(!isNaN(d)) return d; }
   const d = new Date(s); return isNaN(d)? null : d;
 }
-
 /* filas [[encabezados],[...datos]] → objetos con claves normalizadas */
 function aObjetos(values){
   if(!values || values.length<2) return [];
@@ -446,7 +405,6 @@ function valDe(o, ...pats){
   for(const k of Object.keys(o)) for(const p of pats) if(p.test(k)) return o[k];
   return null;
 }
-
 /* sección electoral a partir de coordenadas (punto en polígono) */
 function pip(lng, lat, ring){
   let dentro=false;
@@ -465,7 +423,6 @@ function seccionDe(lat,lng){
   }
   return null;
 }
-
 function tipoDe(evento, tipoCol){
   if(tipoCol && String(tipoCol).trim()) return String(tipoCol).trim();
   const e = normK(evento);
@@ -477,7 +434,6 @@ function tipoDe(evento, tipoCol){
   if(/activacion/.test(e)) return 'Activación';
   return 'Evento';
 }
-
 function mapActs(rows){
   return rows.map(o=>{
     const evento = valDe(o,/^evento/,/actividad/,/tema/,/titulo/) || '';
@@ -502,22 +458,34 @@ function mapActs(rows){
     };
   }).filter(Boolean);
 }
-
 function mapComs(rows){
   return rows.map(o=>{
-    const tema = valDe(o,/^tema/), campana = valDe(o,/campana/), tipoP = valDe(o,/^tipo/);
-    const tituloCol = valDe(o,/^titulo/,/^publicacion$/,/^contenido/);
-    const fecha = parseFecha(valDe(o,/^fecha/));
     const id = String(valDe(o,/^id/)||'').trim();
-    const titulo = String(tituloCol || [tema, tipoP?('('+String(tipoP).trim()+')'):''].filter(Boolean).join(' ') || 'Publicación').trim();
-    if(!id && !tituloCol && !tema && !fecha) return null;
+    const fecha = parseFecha(valDe(o,/^dia$/,/^fecha/));
+    const hora = String(valDe(o,/^horario/,/^hora$/)||'').trim();
+    const categoria = String(valDe(o,/^categoria/)||'General').trim();
+    const elaboro = String(valDe(o,/elaboro/)||'').trim();
+    const temas = String(valDe(o,/^temas?$/)||'').trim();
+    const estatus = String(valDe(o,/^estatus/)||'').trim();
+    const formato = String(valDe(o,/^formato/)||'').trim();
+    const notas = String(valDe(o,/^notas/)||'').trim();
+    const plataformaRaw = String(valDe(o,/plataforma/,/^red/,/canal/,/medio/)||'').trim();
+    const plataformas = plataformaRaw.split(/\s*,\s*|\s*\/\s*|\s+y\s+|\s+&\s+/i).map(s=>s.trim()).filter(Boolean);
+    const titulo = String(temas || [formato, categoria].filter(Boolean).join(' · ') || 'Publicación').trim();
+    if(!id && !temas && !fecha) return null;
     return {
       id: normK(id),
       fecha: fecha || new Date(),
-      plataforma: String(valDe(o,/plataforma/,/^red/,/canal/,/medio/)||'Otra').trim(),
-      cuenta: String(valDe(o,/^cuenta/)||'').trim(),
+      hora,
+      categoria,
+      elaboro,
+      temas,
+      estatus,
+      formato,
+      plataformas: plataformas.length ? plataformas : ['Otra'],
+      plataforma: plataformas.length ? plataformas.join(', ') : 'Otra',
       titulo,
-      publico: String(valDe(o,/publico/,/audiencia/,/segmento/)||campana||tema||'General').trim(),
+      notas,
       alcance: numDe(valDe(o,/alcance/,/vistas/,/views/,/impresion/)),
       likes: numDe(valDe(o,/likes/,/me gusta/,/reaccion/)),
       comentarios: numDe(valDe(o,/comentario/)),
@@ -526,7 +494,6 @@ function mapComs(rows){
     };
   }).filter(Boolean);
 }
-
 /* pestaña Metricas: filas por id_post; se toma el valor máximo reportado */
 function mapMetricas(rows){
   const M = {};
@@ -553,7 +520,6 @@ function cruzarMetricas(coms, M){
   });
   return coms;
 }
-
 /* un bloque de pestaña ¿es de comunicación o de territorio? */
 function esComs(bloque){
   if(normK(bloque.tab).includes('metric')) return 'metricas';
@@ -564,21 +530,14 @@ function esComs(bloque){
   }
   return normK(bloque.area).includes('comunic');
 }
-
 async function cargarAppsScript(){
   const r = await fetch(APPS_SCRIPT_URL);
   if(!r.ok) throw new Error('HTTP '+r.status);
   const bloques = await r.json();
-  const acts=[], coms=[], parrilla=[], errores=[]; let M={};
+  const acts=[], coms=[], errores=[]; let M={};
   (Array.isArray(bloques)?bloques:[]).forEach(b=>{
     if(!b || !b.values) return;
     if(b.tab==='ERROR'){ errores.push(b.area); return; }
-    if(normK(b.tab).includes('parrilla')){
-      const headers = (b.values[0]||[]).map(h=>h==null?'':String(h));
-      const rows = b.values.slice(1).filter(r=>r.some(c=>c!=null && String(c).trim()!==''));
-      if(headers.length) parrilla.push({tab:b.tab, headers, rows});
-      return;
-    }
     const rows = aObjetos(b.values);
     const clase = esComs(b);
     if(clase==='metricas') Object.assign(M, mapMetricas(rows));
@@ -586,11 +545,10 @@ async function cargarAppsScript(){
     else acts.push(...mapActs(rows));
   });
   cruzarMetricas(coms, M);
-  if(!acts.length && !coms.length && !parrilla.length)
+  if(!acts.length && !coms.length)
     throw new Error(errores.length ? 'el script no pudo abrir: '+errores.join(', ') : 'el script respondió sin filas; revisa IDs y nombres de pestañas dentro del Apps Script');
-  return {acts, coms, parrilla};
+  return {acts, coms};
 }
-
 /* -------- respaldo gviz (documento público) -------- */
 async function leerHoja(id, hoja){
   const url = `https://docs.google.com/spreadsheets/d/${id}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(hoja)}`;
@@ -603,17 +561,11 @@ async function leerHoja(id, hoja){
   return values;
 }
 async function cargarSheets(id){
-  const nombres = ['Agenda MH','Parrilla','Publicaciones','Metricas','Actividades','Comunicacion'];
-  const acts=[], coms=[], parrilla=[]; let M={};
+  const nombres = ['Agenda MH','Publicaciones','Metricas','Actividades','Comunicacion'];
+  const acts=[], coms=[]; let M={};
   for(const h of nombres){
     try{
       const values = await leerHoja(id,h);
-      if(normK(h).includes('parrilla')){
-        const headers = (values[0]||[]).map(x=>x==null?'':String(x));
-        const rows = values.slice(1).filter(r=>r.some(c=>c!=null && String(c).trim()!==''));
-        if(headers.length) parrilla.push({tab:h, headers, rows});
-        continue;
-      }
       const bloque = {area:h, tab:h, values};
       const rows = aObjetos(values);
       const clase = esComs(bloque);
@@ -623,24 +575,21 @@ async function cargarSheets(id){
     }catch(e){/* pestaña inexistente: se ignora */}
   }
   cruzarMetricas(coms, M);
-  if(!acts.length && !coms.length && !parrilla.length) throw new Error('sin datos');
-  return {acts, coms, parrilla};
+  if(!acts.length && !coms.length) throw new Error('sin datos');
+  return {acts, coms};
 }
-
 async function cargarDatos(){
   if(APPS_SCRIPT_URL) return cargarAppsScript();
   if(SHEET_ID) return cargarSheets(SHEET_ID);
   throw new Error('sin fuente configurada');
 }
-
 /* ================= ESTADO ================= */
-let DATA = Object.assign(datosDemo(), {parrilla: []});
+let DATA = datosDemo();
 let capaActual = 'clasificacion';
 let DISTRITO = ''; // '' = todos
 let mapa, capaGeo, capaPuntos;
 const porSec = {}; GEO.features.forEach(f=>porSec[f.properties.SECCION]=f.properties);
 const charts = {};
-
 const enDistrito = p => !DISTRITO || String(p.DISTRITO_L)===DISTRITO;
 const actEnDistrito = a => !DISTRITO || a.secciones.some(s=>porSec[s] && String(porSec[s].DISTRITO_L)===DISTRITO);
 function cambiarDistrito(v){
@@ -654,7 +603,6 @@ function cambiarDistrito(v){
   document.getElementById('detSec').innerHTML = '<div class="det-vacio">Selecciona una sección en el mapa para ver su diagnóstico, la acción propuesta y las actividades registradas.</div>';
   render();
 }
-
 /* ================= MAPA ================= */
 function colorSec(p){
   if(capaActual==='clasificacion') return COLORES[p.clasificacion]||'#D6D0C6';
@@ -786,13 +734,11 @@ function seleccionar(p){
       </div>
     </div>`;
 }
-
 /* ================= RENDER GENERAL ================= */
 function destruir(id){ if(charts[id]){charts[id].destroy(); delete charts[id];} }
 function graf(id, cfg){ destruir(id); charts[id] = new Chart(document.getElementById(id), cfg); }
 Chart.defaults.font.family = 'Inter';
 Chart.defaults.color = '#6B6157';
-
 function render(){
   const acts = DATA.acts.filter(actEnDistrito), coms = DATA.coms;
   const hoy = new Date();
@@ -806,7 +752,6 @@ function render(){
   const asistentes = acts.reduce((s,a)=>s+a.asistentes,0);
   const alcance = coms.reduce((s,c)=>s+c.alcance,0);
   const inter = coms.reduce((s,c)=>s+c.likes+c.comentarios+c.compartidos,0);
-
   // KPIs resumen
   kVotos.textContent = F(votosGanar);
   kPrior.textContent = F(prior.length);
@@ -819,7 +764,6 @@ function render(){
   kAsist.textContent = F(asistentes);
   kAlcance.textContent = Fk(alcance);
   kInter.textContent = F(inter)+' interacciones';
-
   // Territorio
   tTot.textContent = F(acts.length);
   tCoord.textContent = new Set(acts.map(a=>a.coordinador)).size+' coordinadores activos';
@@ -828,27 +772,23 @@ function render(){
   tAsist.textContent = F(asistentes);
   tProm.textContent = acts.length? F(asistentes/acts.length)+' promedio por actividad':'—';
   tPend.textContent = F(prior.length - priorVis);
-
   // filtros bitácora
   const selT = document.getElementById('fTipo'), selC = document.getElementById('fCoord');
   const tv = selT.value, cv = selC.value;
   selT.innerHTML = '<option value="">Todos los tipos</option>'+[...new Set(acts.map(a=>a.tipo))].map(t=>`<option ${t===tv?'selected':''}>${t}</option>`).join('');
   selC.innerHTML = '<option value="">Todos los coordinadores</option>'+[...new Set(acts.map(a=>a.coordinador))].map(t=>`<option ${t===cv?'selected':''}>${t}</option>`).join('');
   pintarBitacora();
-
   // charts resumen
   const clases = ['Fortaleza','Oportunidad','Recuperable','Adversa'];
   graf('gAvance',{type:'bar',data:{labels:clases,datasets:[
     {label:'Visitadas',data:clases.map(c=>props.filter(p=>p.clasificacion===c&&vis.has(p.SECCION)).length),backgroundColor:'#F55B00'},
     {label:'Sin visitar',data:clases.map(c=>props.filter(p=>p.clasificacion===c&&!vis.has(p.SECCION)).length),backgroundColor:'#E4DDD2'}
   ]},options:{maintainAspectRatio:false,scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,grid:{color:'#F0EBE3'}}},plugins:{legend:{position:'bottom'}}}});
-
   const semanas = {}; 
   acts.forEach(a=>{const d=new Date(a.fecha); d.setDate(d.getDate()-d.getDay()); const k=d.toISOString().slice(0,10); semanas[k]=(semanas[k]||0)+1;});
   const ks = Object.keys(semanas).sort();
   graf('gRitmo',{type:'line',data:{labels:ks.map(k=>new Date(k).toLocaleDateString('es-MX',{day:'numeric',month:'short'})),datasets:[{label:'Actividades',data:ks.map(k=>semanas[k]),borderColor:'#F55B00',backgroundColor:'rgba(245,91,0,.12)',fill:true,tension:.3,pointBackgroundColor:'#F55B00'}]},
     options:{maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'#F0EBE3'}},x:{grid:{display:false}}}}});
-
   // charts territorio
   const tiposC = {}; acts.forEach(a=>tiposC[a.tipo]=(tiposC[a.tipo]||0)+1);
   graf('gTipos',{type:'bar',data:{labels:Object.keys(tiposC),datasets:[{data:Object.values(tiposC),backgroundColor:['#F55B00','#C2410C','#F9A825','#E4C580','#64748B','#7A1F00']}]},
@@ -859,22 +799,22 @@ function render(){
     {label:'Actividades',data:cn.map(c=>coordC[c].n),backgroundColor:'#F55B00',yAxisID:'y'},
     {label:'Asistentes',data:cn.map(c=>coordC[c].a),backgroundColor:'#26221E',yAxisID:'y1'}]},
     options:{maintainAspectRatio:false,plugins:{legend:{position:'bottom'}},scales:{y:{beginAtZero:true,grid:{color:'#F0EBE3'}},y1:{beginAtZero:true,position:'right',grid:{display:false}},x:{grid:{display:false}}}}});
-
   // Comunicación
   cAlcance.textContent = Fk(alcance);
-  cPubs.textContent = coms.length+' publicaciones';
+  const publicadas = coms.filter(c=>/public/i.test(c.estatus)).length;
+  const programadas = coms.filter(c=>/program/i.test(c.estatus)).length;
+  cPubs.textContent = coms.length+' publicaciones'+(publicadas||programadas? ` (${publicadas} publicadas · ${programadas} programadas)`:'');
   cLikes.textContent = Fk(coms.reduce((s,c)=>s+c.likes,0));
   cComs.textContent = Fk(coms.reduce((s,c)=>s+c.comentarios,0));
   cShares.textContent = Fk(coms.reduce((s,c)=>s+c.compartidos,0));
   cTasa.textContent = alcance? (inter/alcance*100).toFixed(1)+'%' : '—';
-
   const top = [...coms].sort((a,b)=>b.alcance-a.alcance)[0];
   document.getElementById('topVideo').innerHTML = top? `
     <div class="play">▶</div>
     <div style="flex:1">
       <div class="m" style="letter-spacing:1.5px;text-transform:uppercase;font-size:10.5px;color:#F55B00;font-weight:700">Contenido con mayor alcance</div>
       <h3 class="disp">${top.titulo}</h3>
-      <div class="m">${top.plataforma} · ${top.fecha.toLocaleDateString('es-MX',{day:'numeric',month:'long'})} · Tema: ${top.publico}${top.link?` · <a href="${top.link}" target="_blank" style="color:#F9A825">ver publicación</a>`:''}</div>
+      <div class="m">${top.formato?top.formato+' · ':''}${top.plataforma} · ${top.fecha.toLocaleDateString('es-MX',{day:'numeric',month:'long'})} · Categoría: ${top.categoria}${top.link?` · <a href="${top.link}" target="_blank" style="color:#F9A825">ver publicación</a>`:''}</div>
       <div class="cifras">
         <div><b class="num">${Fk(top.alcance)}</b><span>Alcance</span></div>
         <div><b class="num">${Fk(top.likes)}</b><span>Likes</span></div>
@@ -882,64 +822,28 @@ function render(){
         <div><b class="num">${Fk(top.compartidos)}</b><span>Compartidos</span></div>
       </div>
     </div>` : '<div style="padding:10px">Sin publicaciones registradas.</div>';
-
-  const platC = {}; coms.forEach(c=>platC[c.plataforma]=(platC[c.plataforma]||0)+c.alcance);
+  const platC = {}; coms.forEach(c=>{
+    const ps = (c.plataformas && c.plataformas.length) ? c.plataformas : [c.plataforma||'Otra'];
+    ps.forEach(p=>{ platC[p]=(platC[p]||0)+c.alcance; });
+  });
   graf('gPlat',{type:'doughnut',data:{labels:Object.keys(platC),datasets:[{data:Object.values(platC),backgroundColor:['#F55B00','#C2410C','#26221E','#F9A825','#64748B','#E4C580'],borderWidth:2,borderColor:'#fff'}]},
     options:{maintainAspectRatio:false,plugins:{legend:{position:'right'}},cutout:'62%'}});
-  const pubC = {}; coms.forEach(c=>pubC[c.publico]=(pubC[c.publico]||0)+c.alcance);
+  const pubC = {}; coms.forEach(c=>pubC[c.categoria]=(pubC[c.categoria]||0)+c.alcance);
   const pk = Object.keys(pubC).sort((a,b)=>pubC[b]-pubC[a]);
   graf('gPublico',{type:'bar',data:{labels:pk,datasets:[{data:pk.map(k=>pubC[k]),backgroundColor:'#F55B00'}]},
     options:{indexAxis:'y',maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'#F0EBE3'},beginAtZero:true},y:{grid:{display:false}}}}});
-
   document.getElementById('tbPubs').innerHTML = [...coms].sort((a,b)=>b.alcance-a.alcance).map(c=>`
-    <tr><td>${c.fecha.toLocaleDateString('es-MX',{day:'2-digit',month:'short'})}</td><td><span class="tag">${c.plataforma}</span></td>
+    <tr><td>${c.fecha.toLocaleDateString('es-MX',{day:'2-digit',month:'short'})}</td><td><span class="tag">${c.formato||'—'}</span></td>
+    <td>${(c.plataformas||[c.plataforma]).map(p=>`<span class="tag">${p}</span>`).join(' ')}</td>
+    <td>${c.categoria}</td><td>${c.estatus||'—'}</td>
     <td>${c.link?`<a href="${c.link}" target="_blank" style="color:#C2410C">${c.titulo}</a>`:c.titulo}</td>
-    <td>${c.publico}</td><td class="num">${F(c.alcance)}</td><td class="num">${F(c.likes)}</td><td class="num">${F(c.comentarios)}</td><td class="num">${F(c.compartidos)}</td></tr>`).join('');
-
-  pintarParrilla();
+    <td>${c.elaboro||'—'}</td>
+    <td class="num">${F(c.alcance)}</td><td class="num">${F(c.likes)}</td><td class="num">${F(c.comentarios)}</td><td class="num">${F(c.compartidos)}</td></tr>`).join('');
   llenarFiltrosMapa();
   pintarPuntos();
   if(capaGeo) capaGeo.setStyle(estiloSec);
 }
-
-
-/* ================= PARRILLA ================= */
 const escH = s => String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-function pintarParrilla(){
-  const cont = document.getElementById('parrillaCont');
-  if(!cont) return;
-  const q = normK((document.getElementById('fParrilla')||{value:''}).value);
-  const bloques = DATA.parrilla || [];
-  const hoy = new Date(); hoy.setHours(0,0,0,0);
-  let tot=0, prox=0;
-  const html = bloques.map(b=>{
-    const iF = b.headers.findIndex(h=>/^fecha/.test(normK(h)));
-    let filas = b.rows.map(r=>{
-      const rr = b.headers.map((_,i)=> r[i]==null? '' : String(r[i]));
-      return {rr, f: iF>-1 ? parseFecha(rr[iF]) : null};
-    });
-    tot += filas.length;
-    prox += filas.filter(x=>x.f && x.f>=hoy).length;
-    filas.sort((a,c)=>(a.f?a.f.getTime():9e15)-(c.f?c.f.getTime():9e15));
-    if(q) filas = filas.filter(x=>normK(x.rr.join(' ')).includes(q));
-    const th = b.headers.map(h=>`<th>${escH(h)}</th>`).join('');
-    const trs = filas.map(x=>'<tr>'+x.rr.map((c,i)=>{
-      let v = escH(c);
-      if(i===iF && x.f) v = x.f.toLocaleDateString('es-MX',{weekday:'short',day:'2-digit',month:'short'});
-      else if(/^https?:\/\//.test(c)) v = `<a href="${escH(c)}" target="_blank" style="color:#C2410C">abrir</a>`;
-      return `<td>${v}</td>`;
-    }).join('')+'</tr>').join('')
-      || `<tr><td colspan="${b.headers.length}" style="text-align:center;color:#9B9186;padding:20px">Sin filas que coincidan con la búsqueda.</td></tr>`;
-    return `<div class="panel" style="margin-bottom:16px">
-      <div class="panel-h"><h2>${escH(b.tab)}</h2><span class="mini">${filas.length} filas</span></div>
-      <div class="panel-b" style="overflow-x:auto"><table class="datos"><thead><tr>${th}</tr></thead><tbody>${trs}</tbody></table></div></div>`;
-  }).join('');
-  document.getElementById('pTot').textContent = F(tot);
-  document.getElementById('pProx').textContent = F(prox);
-  document.getElementById('pTabs').textContent = bloques.length ? bloques.map(b=>b.tab).join(' · ') : '—';
-  cont.innerHTML = html || '<div class="panel"><div class="panel-b" style="padding:24px;color:#6B6157">La pestaña Parrilla aún no envía datos. Verifica en el Apps Script que el documento de Territorio incluya la pestaña "Parrilla" con ese nombre.</div></div>';
-}
-
 function pintarBitacora(){
   const tv = document.getElementById('fTipo').value, cv = document.getElementById('fCoord').value;
   const rows = DATA.acts.filter(actEnDistrito).filter(a=>(!tv||a.tipo===tv)&&(!cv||a.coordinador===cv)).sort((a,b)=>b.fecha-a.fecha);
@@ -951,7 +855,6 @@ function pintarBitacora(){
     <td class="num">${F(a.asistentes)}</td>
     <td style="color:#6B6157">${a.notas||''}</td></tr>`).join('') || '<tr><td colspan="6" style="text-align:center;color:#9B9186;padding:20px">Sin actividades con esos filtros.</td></tr>';
 }
-
 /* ================= UI ================= */
 function cambiarVista(v,btn){
   document.querySelectorAll('nav button').forEach(b=>b.classList.remove('act'));
@@ -983,7 +886,6 @@ async function conectarSheet(){
     est.style.color='#C62828';
   }
 }
-
 /* ================= INIT ================= */
 document.getElementById('fechaHoy').textContent = new Date().toLocaleDateString('es-MX',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
 (function(){
@@ -1010,7 +912,6 @@ render();
   }
 })();
 setInterval(()=>{ cargarDatos().then(d=>{DATA=d; render();}).catch(()=>{}); }, 5*60*1000);
-
 </script>
 </body>
 </html>
