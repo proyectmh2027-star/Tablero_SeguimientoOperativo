@@ -145,6 +145,7 @@ table.datos tr:hover td{background:#FBF8F3}
 .popup-sec b{font-family:'Barlow Semi Condensed';font-size:16px}
 .filtros-mapa{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px 14px;border-bottom:1px solid #E8E2D8;background:#FBF9F5}
 .filtros-mapa select{font:inherit;font-size:12.5px;padding:5px 8px;border:1px solid #D9D2C6;background:#fff;color:#26221E;max-width:180px}
+.filtros-mapa input[type=search]{font:inherit;font-size:12.5px;padding:5px 8px;border:1px solid #D9D2C6;background:#fff;color:#26221E;max-width:150px}
 .filtros-mapa .chk{font-size:12.5px;display:flex;gap:6px;align-items:center;color:#26221E;font-weight:600}
 .filtros-mapa .mini{margin-left:auto;color:#9B9186;font-size:12px}
 </style>
@@ -200,6 +201,8 @@ table.datos tr:hover td{background:#FBF8F3}
         </div>
       </div>
       <div class="filtros-mapa">
+        <input type="search" id="fSeccion" list="dlSecciones" placeholder="Buscar sección…" oninput="onFiltroSeccion(this.value)">
+        <datalist id="dlSecciones"></datalist>
         <label class="chk"><input type="checkbox" id="mVer" checked onchange="onFiltroMapa()"> Actividades</label>
         <select id="mTipo" onchange="onFiltroMapa()"><option value="">Todos los tipos</option></select>
         <select id="mCoord" onchange="onFiltroMapa()"><option value="">Todos los responsables</option></select>
@@ -258,23 +261,28 @@ table.datos tr:hover td{background:#FBF8F3}
 </section>
 <!-- ============ COMUNICACIÓN ============ -->
 <section class="vista" id="v-comunicacion">
-  <div class="kpi-grid" style="grid-template-columns:repeat(5,1fr)">
+  <div class="kpi-grid" style="grid-template-columns:repeat(6,1fr)">
     <div class="kpi"><div class="lbl">Alcance total</div><div class="val num" id="cAlcance">—</div><div class="det" id="cPubs">— publicaciones</div></div>
     <div class="kpi"><div class="lbl">Likes</div><div class="val num" id="cLikes">—</div><div class="det">reacciones acumuladas</div></div>
     <div class="kpi"><div class="lbl">Comentarios</div><div class="val num" id="cComs">—</div><div class="det">conversación generada</div></div>
     <div class="kpi"><div class="lbl">Compartidos</div><div class="val num" id="cShares">—</div><div class="det">amplificación orgánica</div></div>
     <div class="kpi oscuro"><div class="lbl">Tasa de interacción</div><div class="val num" id="cTasa">—</div><div class="det">interacciones / alcance</div></div>
+    <div class="kpi oscuro"><div class="lbl">Alcance proyectado</div><div class="val num" id="cProy">—</div><div class="det" id="cProyDet">próximas 4 semanas</div></div>
   </div>
   <div style="margin-bottom:16px" class="top-video" id="topVideo"></div>
   <div class="fila dos">
     <div class="panel">
-      <div class="panel-h"><h2>Alcance por plataforma</h2></div>
+      <div class="panel-h"><h2>Alcance por plataforma</h2><span class="mini">real cuando Metricas trae PLATAFORMA; estimado si no</span></div>
       <div class="panel-b"><div class="graf-wrap"><canvas id="gPlat"></canvas></div></div>
     </div>
     <div class="panel">
       <div class="panel-h"><h2>Alcance por categoría</h2><span class="mini">según lo capturado en Publicaciones</span></div>
       <div class="panel-b"><div class="graf-wrap"><canvas id="gPublico"></canvas></div></div>
     </div>
+  </div>
+  <div class="panel">
+    <div class="panel-h"><h2>Proyección de alcance</h2><span class="mini">tendencia semanal real y estimado a futuro · mejora con más semanas de datos</span></div>
+    <div class="panel-b"><div class="graf-wrap"><canvas id="gProyeccion"></canvas></div></div>
   </div>
   <div class="panel">
     <div class="panel-h"><h2>Publicaciones</h2><span class="mini">ordenadas por alcance</span></div>
@@ -401,8 +409,11 @@ function aObjetos(values){
     .filter(r=>r.some(c=>c!=null && String(c).trim()!==''))
     .map(r=>{ const o={}; H.forEach((h,i)=>{ if(h) o[h]=r[i]; }); return o; });
 }
+/* recorre los patrones EN ORDEN DE PRIORIDAD (el primero que dé match en cualquier
+   columna gana) en vez de en orden de columnas — así "alcance" no se pisa con
+   "vistas" solo porque esa columna aparece antes en la hoja. */
 function valDe(o, ...pats){
-  for(const k of Object.keys(o)) for(const p of pats) if(p.test(k)) return o[k];
+  for(const p of pats) for(const k of Object.keys(o)) if(p.test(k)) return o[k];
   return null;
 }
 /* sección electoral a partir de coordenadas (punto en polígono) */
@@ -500,7 +511,9 @@ function mapMetricas(rows){
   rows.forEach(o=>{
     const id = normK(String(valDe(o,/^id/)||'').trim());
     if(!id) return;
-    const m = M[id] || (M[id]={alcance:0,likes:0,comentarios:0,compartidos:0});
+    const plat = normK(String(valDe(o,/plataforma/,/^red/,/canal/,/medio/)||'').trim());
+    const key = id + '|' + (plat || '_');
+    const m = M[key] || (M[key]={alcance:0,likes:0,comentarios:0,compartidos:0});
     m.alcance      = Math.max(m.alcance,      numDe(valDe(o,/alcance/,/vistas/,/views/,/impresion/,/reproduccion/)));
     m.likes        = Math.max(m.likes,        numDe(valDe(o,/likes/,/me gusta/,/reaccion/)));
     m.comentarios  = Math.max(m.comentarios,  numDe(valDe(o,/comentario/)));
@@ -508,15 +521,30 @@ function mapMetricas(rows){
   });
   return M;
 }
+/* cruza Publicaciones con Metricas. Si hay filas de Metricas con PLATAFORMA capturada
+   por separado, arma un desglose real (c.porPlataforma); si no, deja el desglose vacío
+   y el resto del código recurre al método de "huella" (alcance repetido por cada
+   plataforma marcada en la publicación). */
 function cruzarMetricas(coms, M){
   coms.forEach(c=>{
-    const m = c.id && M[c.id];
-    if(m){
-      c.alcance = Math.max(c.alcance, m.alcance);
-      c.likes = Math.max(c.likes, m.likes);
-      c.comentarios = Math.max(c.comentarios, m.comentarios);
-      c.compartidos = Math.max(c.compartidos, m.compartidos);
+    if(!c.id) return;
+    const porPlataforma = {};
+    let sumA=0, sumL=0, sumC=0, sumS=0, tieneDatos=false;
+    (c.plataformas||[]).forEach(p=>{
+      const m = M[c.id+'|'+normK(p)];
+      if(m){ porPlataforma[p]=m; sumA+=m.alcance; sumL+=m.likes; sumC+=m.comentarios; sumS+=m.compartidos; tieneDatos=true; }
+    });
+    if(!tieneDatos){
+      const generico = M[c.id+'|_'];
+      if(generico){ sumA=generico.alcance; sumL=generico.likes; sumC=generico.comentarios; sumS=generico.compartidos; tieneDatos=true; }
     }
+    if(tieneDatos){
+      c.alcance = Math.max(c.alcance, sumA);
+      c.likes = Math.max(c.likes, sumL);
+      c.comentarios = Math.max(c.comentarios, sumC);
+      c.compartidos = Math.max(c.compartidos, sumS);
+    }
+    c.porPlataforma = porPlataforma;
   });
   return coms;
 }
@@ -641,10 +669,12 @@ function seccionesVisitadas(){
   actsFiltradasMapa().forEach(a=>a.secciones.forEach(x=>s.add(x)));
   return s;
 }
+const layerPorSec = {};
 function initMapa(){
   mapa = L.map('mapa',{zoomControl:true, attributionControl:false}).setView([25.67,-100.31],11);
   L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{maxZoom:18}).addTo(mapa);
   capaGeo = L.geoJSON(GEO,{style:estiloSec, onEachFeature:(f,l)=>{
+    layerPorSec[f.properties.SECCION] = l;
     l.on('click',()=>seleccionar(f.properties));
     l.on('mouseover',()=>l.setStyle({weight:2,color:'#26221E'}));
     l.on('mouseout',()=>capaGeo.resetStyle(l));
@@ -653,6 +683,23 @@ function initMapa(){
   capaPuntos = L.layerGroup().addTo(mapa);
   mapa.fitBounds(capaGeo.getBounds());
   pintarLeyenda();
+  const dl = document.getElementById('dlSecciones');
+  if(dl) dl.innerHTML = Object.keys(porSec).sort((a,b)=>+a-+b).map(s=>`<option value="${s}">`).join('');
+}
+/* filtro de búsqueda por sección (Resumen ejecutivo): centra el mapa, resalta
+   el polígono un momento y muestra su ficha en el panel "Sección" */
+function onFiltroSeccion(v){
+  v = String(v).trim();
+  const p = porSec[v];
+  if(!p) return;
+  seleccionar(p);
+  const l = layerPorSec[v];
+  if(l && mapa){
+    mapa.fitBounds(l.getBounds(),{padding:[60,60],maxZoom:15});
+    l.bringToFront();
+    l.setStyle({weight:3,color:'#26221E'});
+    setTimeout(()=>{ if(capaGeo) capaGeo.resetStyle(l); },1600);
+  }
 }
 function pintarPuntos(){
   if(!capaPuntos) return;
@@ -823,8 +870,12 @@ function render(){
       </div>
     </div>` : '<div style="padding:10px">Sin publicaciones registradas.</div>';
   const platC = {}; coms.forEach(c=>{
-    const ps = (c.plataformas && c.plataformas.length) ? c.plataformas : [c.plataforma||'Otra'];
-    ps.forEach(p=>{ platC[p]=(platC[p]||0)+c.alcance; });
+    if(c.porPlataforma && Object.keys(c.porPlataforma).length){
+      Object.entries(c.porPlataforma).forEach(([p,m])=>{ platC[p]=(platC[p]||0)+m.alcance; });
+    } else {
+      const ps = (c.plataformas && c.plataformas.length) ? c.plataformas : [c.plataforma||'Otra'];
+      ps.forEach(p=>{ platC[p]=(platC[p]||0)+c.alcance; });
+    }
   });
   graf('gPlat',{type:'doughnut',data:{labels:Object.keys(platC),datasets:[{data:Object.values(platC),backgroundColor:['#F55B00','#C2410C','#26221E','#F9A825','#64748B','#E4C580'],borderWidth:2,borderColor:'#fff'}]},
     options:{maintainAspectRatio:false,plugins:{legend:{position:'right'}},cutout:'62%'}});
@@ -839,9 +890,51 @@ function render(){
     <td>${c.link?`<a href="${c.link}" target="_blank" style="color:#C2410C">${c.titulo}</a>`:c.titulo}</td>
     <td>${c.elaboro||'—'}</td>
     <td class="num">${F(c.alcance)}</td><td class="num">${F(c.likes)}</td><td class="num">${F(c.comentarios)}</td><td class="num">${F(c.compartidos)}</td></tr>`).join('');
+  proyectarAlcance(coms);
   llenarFiltrosMapa();
   pintarPuntos();
   if(capaGeo) capaGeo.setStyle(estiloSec);
+}
+/* proyección simple (regresión lineal) sobre el alcance semanal acumulado */
+function proyectarAlcance(coms){
+  const cProy = document.getElementById('cProy'), cProyDet = document.getElementById('cProyDet');
+  const semC = {};
+  coms.forEach(c=>{
+    const d = new Date(c.fecha); d.setDate(d.getDate()-d.getDay()); d.setHours(0,0,0,0);
+    const k = d.toISOString().slice(0,10);
+    semC[k] = (semC[k]||0) + c.alcance;
+  });
+  const wks = Object.keys(semC).sort();
+  const FUT = 4;
+  if(wks.length < 2){
+    if(cProy) cProy.textContent = '—';
+    if(cProyDet) cProyDet.textContent = 'necesitas al menos 2 semanas de datos';
+    graf('gProyeccion',{type:'line',data:{labels:wks.map(k=>new Date(k).toLocaleDateString('es-MX',{day:'numeric',month:'short'})),
+      datasets:[{label:'Alcance real',data:wks.map(k=>semC[k]),borderColor:'#F55B00',backgroundColor:'rgba(245,91,0,.12)',fill:true,tension:.3,pointBackgroundColor:'#F55B00'}]},
+      options:{maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'#F0EBE3'}},x:{grid:{display:false}}}}});
+    return;
+  }
+  const ys = wks.map(k=>semC[k]);
+  const n = ys.length;
+  const xs = ys.map((_,i)=>i);
+  const sx = xs.reduce((a,x)=>a+x,0), sy = ys.reduce((a,y)=>a+y,0);
+  const sxy = xs.reduce((a,x,i)=>a+x*ys[i],0), sxx = xs.reduce((a,x)=>a+x*x,0);
+  const denom = (n*sxx - sx*sx) || 1;
+  const m = (n*sxy - sx*sy) / denom;
+  const b = (sy - m*sx) / n;
+  const proy = Array.from({length:FUT},(_,i)=>Math.max(0, Math.round(m*(n+i) + b)));
+  const totalProy = proy.reduce((a,v)=>a+v,0);
+  if(cProy) cProy.textContent = Fk(totalProy);
+  if(cProyDet) cProyDet.textContent = (m>=0?'↑ tendencia al alza':'↓ tendencia a la baja')+' · próx. '+FUT+' semanas';
+  const labelsHist = wks.map(k=>new Date(k).toLocaleDateString('es-MX',{day:'numeric',month:'short'}));
+  const lastDate = new Date(wks[wks.length-1]);
+  const labelsFut = Array.from({length:FUT},(_,i)=>{ const d=new Date(lastDate); d.setDate(d.getDate()+7*(i+1)); return d.toLocaleDateString('es-MX',{day:'numeric',month:'short'}); });
+  const dataReal = ys.concat(Array(FUT).fill(null));
+  const dataProy = Array(n-1).fill(null).concat([ys[n-1]]).concat(proy);
+  graf('gProyeccion',{type:'line',data:{labels:labelsHist.concat(labelsFut),datasets:[
+    {label:'Alcance real',data:dataReal,borderColor:'#F55B00',backgroundColor:'rgba(245,91,0,.12)',fill:true,tension:.3,pointBackgroundColor:'#F55B00'},
+    {label:'Proyección',data:dataProy,borderColor:'#F9A825',borderDash:[6,4],backgroundColor:'rgba(249,168,37,.08)',fill:false,tension:.3,pointBackgroundColor:'#F9A825'}
+  ]},options:{maintainAspectRatio:false,plugins:{legend:{position:'bottom'}},scales:{y:{beginAtZero:true,grid:{color:'#F0EBE3'}},x:{grid:{display:false}}}}});
 }
 const escH = s => String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 function pintarBitacora(){
